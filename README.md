@@ -11,25 +11,25 @@ The CurlMultiManager is capeable of starting multiple requests and limit the num
 
 Minimal example code using 'var_dump' as callback.
 
-<?php
-require_once __DIR__.'/CurlMulti.php';
+    <?php
+    require_once __DIR__.'/CurlMulti.php';
 
-// Config
-$max_parallel_requests = 2;
-$tries_max = 3;
-$urls = array(
-  'https://github.com/',
-  'http://soundcloud.com/',
-  'http://juliusbeckmann.de/',
-);
+    // Config
+    $max_parallel_requests = 2;
+    $tries_max = 3;
+    $urls = array(
+      'https://github.com/',
+      'http://soundcloud.com/',
+      'http://juliusbeckmann.de/',
+    );
 
-$manager = new CurlMultiManager($max_parallel_requests);
-foreach($urls as $url) {
-  $request = $manager->newRequest($url);
-  $request->setCallback('var_dump');
-  $request->setTriesMax($tries_max);
-  $manager->startRequest($request);
-}
-$manager->finishAllRequests();
-?>
+    $manager = new CurlMultiManager($max_parallel_requests);
+    foreach($urls as $url) {
+      $request = $manager->newRequest($url);
+      $request->setCallback('var_dump');
+      $request->setTriesMax($tries_max);
+      $manager->startRequest($request);
+    }
+    $manager->finishAllRequests();
+    ?>
 
